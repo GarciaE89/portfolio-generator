@@ -1,35 +1,14 @@
+const fs = require('fs');
+const generatePage = require('./src/page-template.js');
 
-const profileDataArgs = process.argv.slice(2, process.argv.length);
-// console.log(profileDataArgs);
+const profileDataArgs = process.argv.slice(2);
 
-
-
-
-
+const [names, github] = profileDataArgs;
 
 
 
-
-
-
-
-
-
-
-
-
-
-// notice the lack of partenthese around the `profileDataArr` parameter?
-const printProfileData = profileDataArr => {
-// this..
-    for (let i = 0; i < profileDataArr.length; i += 1) {
-        console.log(profileDataArr[i]);
-        }
-   
-        console.log('================');
-
-        // is the same as this ..
-        profileDataArr.forEach(profileItem => console.log(profileItem)); 
-};
-
-printProfileData(profileDataArgs);
+fs.writeFile('./index.html', generatePage(names, github), err => {
+    if (err) throw new Error(err);
+    
+    console.log('Portfolio complete! Checkout index.html to see the output!');
+});
